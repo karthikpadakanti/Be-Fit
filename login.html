@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be Fit - Register</title>
+  <link rel="stylesheet" type="text/css" href="Style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Be Fit Logo">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="signin.html">Sign in</a></li> <!-- Updated to go to signin.html -->
+    </ul>
+  </nav>
+</header>
+
+<section id="login" class="login">
+  <div class="registration-form form">
+    <p class="title">Register</p>
+    <p class="message">Signup now and get full access to our Services.</p>
+    <div class="flex">
+      <label>
+        <input id="firstname" class="input" type="text" placeholder="First Name" required>
+      </label>
+      <label>
+        <input id="lastname" class="input" type="text" placeholder="Last Name" required>
+      </label>
+    </div>
+    <label>
+      <input id="email" class="input" type="email" placeholder="Email" required>
+    </label>
+    <label>
+      <input id="password" class="input" type="password" placeholder="Password" required>
+    </label>
+    <label>
+      <input id="confirmPassword" class="input" type="password" placeholder="Confirm Password" required>
+    </label>
+    <button class="submit" onclick="register()">Submit</button>
+    <p class="signin">Already have an account? <a href="signin.html">Sign in</a></p> <!-- Updated link -->
+  </div>
+</section>
+
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID",
+    measurementId: "YOUR_MEASUREMENT_ID"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  function register() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const firstname = document.getElementById('firstname').value;
+    const lastname = document.getElementById('lastname').value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // User registered successfully
+        alert("Account created successfully!");
+        // Redirect to the homepage
+        window.location.href = "Homepage.html";
+      })
+      .catch((error) => {
+        // Handle registration errors
+        alert(error.message);
+      });
+  }
+</script>
+
+</body>
+</html>

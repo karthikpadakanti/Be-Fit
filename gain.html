@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Diet Plan</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            width: 200px;
+        }
+
+        .btn {
+            width: 140px;
+            height: 50px;
+            background: linear-gradient(to top, #00154c, #12376e, #23487f);
+            color: #fff;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .btn span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: top 0.5s;
+        }
+
+        .btn-text-one {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .btn-text-two {
+            position: absolute;
+            width: 100%;
+            top: 150%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .btn:hover .btn-text-one {
+            top: -100%;
+        }
+
+        .btn:hover .btn-text-two {
+            top: 50%;
+        }
+
+        .diet-plan {
+            margin-top: 50px;
+            text-align: left;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Personalized Diet Plan for Weight Gain</h1>
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" min="5" max="100">
+    </div>
+    <div class="form-group">
+        <label for="weight">Current Weight (kg):</label>
+        <input type="number" id="weight" min="10" max="200">
+    </div>
+    <button class="btn" onclick="generateDietPlan()">
+        <span class="btn-text-one">Generate Plan</span>
+        <span class="btn-text-two">Great!</span>
+    </button>
+    <div id="dietPlan" class="diet-plan"></div>
+</div>
+
+<script>
+    function generateDietPlan() {
+        const age = parseInt(document.getElementById('age').value);
+        const weight = parseInt(document.getElementById('weight').value);
+        const dietPlan = document.getElementById('dietPlan');
+        let plan = '';
+
+        if (age >= 5 && age <= 10) {
+            plan = `
+                <h2>Diet Plan for Age 5-10 years (Weight: ${weight} kg)</h2>
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 1 scrambled egg, 1 slice whole-grain toast with butter, 1 banana</p>
+                <p><strong>Mid-Morning Snack:</strong> 1 yogurt cup (200 ml), Handful of mixed nuts</p>
+                <p><strong>Lunch:</strong> Grilled chicken sandwich with whole-grain bread, Carrot sticks with hummus, 1 small apple</p>
+                <p><strong>Afternoon Snack:</strong> Cheese and crackers, 1 glass fruit smoothie with whole milk</p>
+                <p><strong>Dinner:</strong> Baked salmon (100g), Mashed potatoes with butter, Steamed broccoli, 1 glass whole milk</p>
+                <p><strong>Evening Snack:</strong> Peanut butter on whole-grain crackers, 1 small orange</p>
+            `;
+        } else if (age >= 11 && age <= 18) {
+            plan = `
+                <h2>Diet Plan for Age 11-18 years (Weight: ${weight} kg)</h2>
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 2 scrambled eggs with cheese, 2 slices whole-grain toast with avocado, 1 orange</p>
+                <p><strong>Mid-Morning Snack:</strong> Smoothie with whole milk, banana, and peanut butter</p>
+                <p><strong>Lunch:</strong> Turkey wrap with whole-wheat tortilla, Greek yogurt with honey, Mixed fruit salad</p>
+                <p><strong>Afternoon Snack:</strong> Trail mix (nuts, dried fruits, dark chocolate pieces)</p>
+                <p><strong>Dinner:</strong> Beef stir-fry with vegetables (150g beef), Brown rice, 1 glass whole milk</p>
+                <p><strong>Evening Snack:</strong> Cottage cheese with pineapple chunks, Whole-grain crackers</p>
+            `;
+        } else if (age >= 19 && age <= 30) {
+            plan = `
+                <h2>Diet Plan for Age 19-30 years (Weight: ${weight} kg)</h2>
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 3 eggs omelette with cheese and vegetables, 2 slices whole-grain toast with butter, 1 apple</p>
+                <p><strong>Mid-Morning Snack:</strong> Protein shake with whole milk, banana, and oats</p>
+                <p><strong>Lunch:</strong> Chicken breast (200g) with quinoa, Steamed mixed vegetables, Greek yogurt with granola</p>
+                <p><strong>Afternoon Snack:</strong> Almond butter on whole-grain bread, 1 small banana</p>
+                <p><strong>Dinner:</strong> Grilled salmon (200g), Sweet potato mash with butter, Spinach salad with olive oil dressing, 1 glass whole milk</p>
+                <p><strong>Evening Snack:</strong> Smoothie with whole milk, berries, and protein powder, Handful of nuts</p>
+            `;
+        } else if (age >= 31 && age <= 50) {
+            plan = `
+                <h2>Diet Plan for Age 31-50 years (Weight: ${weight} kg)</h2>
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 2 poached eggs, 2 slices whole-grain toast with avocado, 1 orange</p>
+                <p><strong>Mid-Morning Snack:</strong> Smoothie with whole milk, spinach, banana, and almond butter</p>
+                <p><strong>Lunch:</strong> Tuna salad with whole-wheat pasta, Greek yogurt with honey, Mixed berries</p>
+                <p><strong>Afternoon Snack:</strong> Cheese and whole-grain crackers</p>
+                <p><strong>Dinner:</strong> Grilled chicken (200g), Quinoa with mixed vegetables, 1 glass whole milk</p>
+                <p><strong>Evening Snack:</strong> Cottage cheese with peaches, Whole-grain crackers</p>
+            `;
+        } else if (age >= 51) {
+            plan = `
+                <h2>Diet Plan for Age 51+ years (Weight: ${weight} kg)</h2>
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 2 boiled eggs, 1 slice whole-grain toast with butter, 1 small apple</p>
+                <p><strong>Mid-Morning Snack:</strong> Greek yogurt with honey and walnuts</p>
+                <p><strong>Lunch:</strong> Baked salmon (150g), Brown rice, Steamed green beans, 1 small banana</p>
+                <p><strong>Afternoon Snack:</strong> Almond butter on whole-grain bread, 1 small orange</p>
+                <p><strong>Dinner:</strong> Turkey breast (200g), Mashed sweet potatoes with butter, Steamed broccoli, 1 glass whole milk</p>
+                <p><strong>Evening Snack:</strong> Smoothie with whole milk, berries, and protein powder, Handful of mixed nuts</p>
+            `;
+        } else {
+            plan = '<p>Please enter a valid age and weight.</p>';
+        }
+
+        dietPlan.innerHTML = plan;
+        dietPlan.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

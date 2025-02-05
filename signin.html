@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In</title>
+  <link rel="stylesheet" type="text/css" href="Style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDQs3e-qjlpMxr65-aIMpB6rThQ5GedR1U",
+      authDomain: "be-fit-7980d.firebaseapp.com",
+      projectId: "be-fit-7980d",
+      storageBucket: "be-fit-7980d.appspot.com",
+      messagingSenderId: "48686172775",
+      appId: "1:48686172775:web:6c109d0269193775d5a2c2",
+      measurementId: "G-ZZ1DR0FHNH"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    function signIn() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // Redirect to Homepage.html after successful sign-in
+          window.location.href = "Homepage.html";
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error(errorMessage);
+          // Handle sign-in errors here
+        });
+    }
+  </script>
+</head>
+
+<body>
+
+<div class="container">
+  <form class="form">
+    <p class="form-title">Sign in to your account</p>
+    <div class="input-container">
+      <input type="email" id="email" placeholder="Enter email">
+      <span></span>
+    </div>
+    <div class="input-container">
+      <input type="password" id="password" placeholder="Enter password">
+    </div>
+
+    <button type="button" class="submit" onclick="signIn()">Sign in</button>
+    <p class="signup-link">
+      No account? <a href="#">Sign up</a>
+    </p>
+  </form>
+</div>
+
+</body>
+</html>

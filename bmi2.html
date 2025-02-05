@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Diet Plan with BMI for Weight Gain</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            width: 200px;
+        }
+
+        .btn {
+            width: 140px;
+            height: 50px;
+            background: linear-gradient(to top, #00154c, #12376e, #23487f);
+            color: #fff;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .btn span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: top 0.5s;
+        }
+
+        .btn-text-one {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .btn-text-two {
+            position: absolute;
+            width: 100%;
+            top: 150%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .btn:hover .btn-text-one {
+            top: -100%;
+        }
+
+        .btn:hover .btn-text-two {
+            top: 50%;
+        }
+
+        .diet-plan {
+            margin-top: 50px;
+            text-align: left;
+            display: none;
+        }
+
+        .chart-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Personalized Diet Plan for Weight Gain</h1>
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" min="5" max="100">
+    </div>
+    <div class="form-group">
+        <label for="weight">Current Weight (kg):</label>
+        <input type="number" id="weight" min="10" max="200">
+    </div>
+    <div class="form-group">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" min="50" max="250">
+    </div>
+    <button class="btn" onclick="generateDietPlan()">
+        <span class="btn-text-one">Generate Plan</span>
+        <span class="btn-text-two">Great!</span>
+    </button>
+    <div id="dietPlan" class="diet-plan"></div>
+    <div class="chart-container">
+        <canvas id="bmiChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function calculateBMI(weight, height) {
+        return (weight / ((height / 100) ** 2)).toFixed(2);
+    }
+
+    function generateDietPlan() {
+        const age = parseInt(document.getElementById('age').value);
+        const weight = parseInt(document.getElementById('weight').value);
+        const height = parseInt(document.getElementById('height').value);
+        const bmi = calculateBMI(weight, height);
+        const dietPlan = document.getElementById('dietPlan');
+        let plan = '';
+
+        if (bmi < 18.5) {
+            plan = generateWeightGainPlan(age, weight);
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+            plan = '<p>Your BMI is normal. To gain weight, consider adding calorie-dense and nutrient-rich foods to your diet.</p>';
+        } else if (bmi >= 25 && bmi < 29.9) {
+            plan = '<p>Your BMI is in the overweight range. Please consult a healthcare provider for a personalized plan.</p>';
+        } else if (bmi >= 30) {
+            plan = '<p>Your BMI indicates obesity. Please consult a healthcare provider for a personalized plan.</p>';
+        }
+
+        dietPlan.innerHTML = `
+            <h2>Diet Plan (BMI: ${bmi})</h2>
+            ${plan}
+        `;
+        dietPlan.style.display = 'block';
+
+        renderChart(bmi);
+    }
+
+    function generateWeightGainPlan(age, weight) {
+        if (age >= 5 && age <= 10) {
+            return `
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 1 boiled egg, 1 slice whole-grain toast with butter, 1 small banana</p>
+                <p><strong>Mid-Morning Snack:</strong> 1 small yogurt cup (150 ml), Handful of nuts</p>
+                <p><strong>Lunch:</strong> Peanut butter and jelly sandwich on whole-grain bread, Carrot sticks, 1 small apple</p>
+                <p><strong>Afternoon Snack:</strong> Cheese sticks, 1 small orange</p>
+                <p><strong>Dinner:</strong> Grilled chicken breast (100g), Mashed potatoes with butter, Steamed broccoli</p>
+                <p><strong>Evening Snack:</strong> 1 small pear, Greek yogurt (100g)</p>
+            `;
+        } else if (age >= 11 && age <= 18) {
+            return `
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 2 egg omelette with cheese, 1 slice whole-grain toast, 1 small apple</p>
+                <p><strong>Mid-Morning Snack:</strong> Smoothie with whole milk, banana, and peanut butter</p>
+                <p><strong>Lunch:</strong> Chicken sandwich on whole-grain bread, mixed greens, 1 small orange</p>
+                <p><strong>Afternoon Snack:</strong> Trail mix, 1 small banana</p>
+                <p><strong>Dinner:</strong> Baked salmon (150g), Quinoa, Steamed asparagus</p>
+                <p><strong>Evening Snack:</strong> Cottage cheese with honey and walnuts</p>
+            `;
+        } else if (age >= 19 && age <= 30) {
+            return `
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 3 egg omelette with cheese and vegetables, 1 slice whole-grain toast, 1 small orange</p>
+                <p><strong>Mid-Morning Snack:</strong> Protein shake with whole milk, spinach, and banana</p>
+                <p><strong>Lunch:</strong> Grilled chicken breast (150g) with mixed greens, quinoa, and light vinaigrette</p>
+                <p><strong>Afternoon Snack:</strong> Cheese sticks, 1 small apple</p>
+                <p><strong>Dinner:</strong> Grilled tofu (150g), Steamed mixed vegetables, 1 small portion of brown rice</p>
+                <p><strong>Evening Snack:</strong> Smoothie with whole milk, berries, and protein powder</p>
+            `;
+        } else if (age >= 31 && age <= 50) {
+            return `
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 2 boiled eggs, 1 slice whole-grain toast with butter, 1 small grapefruit</p>
+                <p><strong>Mid-Morning Snack:</strong> Smoothie with whole milk, spinach, and banana</p>
+                <p><strong>Lunch:</strong> Turkey wrap with whole-wheat tortilla, mixed greens, and light dressing</p>
+                <p><strong>Afternoon Snack:</strong> Cheese sticks, 1 small pear</p>
+                <p><strong>Dinner:</strong> Grilled salmon (150g), Mashed potatoes with butter, Steamed broccoli</p>
+                <p><strong>Evening Snack:</strong> Cottage cheese with pineapple chunks</p>
+            `;
+        } else if (age >= 51) {
+            return `
+                <p><strong>Breakfast:</strong> 1 glass whole milk (250 ml), 2 boiled eggs, 1 slice whole-grain toast with butter, 1 small apple</p>
+                <p><strong>Mid-Morning Snack:</strong> Greek yogurt with honey and walnuts</p>
+                <p><strong>Lunch:</strong> Baked salmon (150g), Brown rice, Steamed green beans, 1 small orange</p>
+                <p><strong>Afternoon Snack:</strong> Cheese sticks, 1 small pear</p>
+                <p><strong>Dinner:</strong> Grilled chicken breast (150g), Quinoa, Steamed mixed vegetables</p>
+                <p><strong>Evening Snack:</strong> Smoothie with whole milk, berries, and protein powder</p>
+            `;
+        }
+    }
+
+    function renderChart(bmi) {
+        const ctx = document.getElementById('bmiChart').getContext('2d');
+        const bmiData = {
+            labels: ['Underweight', 'Normal', 'Overweight', 'Obesity'],
+            datasets: [{
+                label: 'BMI',
+                data: [18.5, 24.9, 29.9, 30],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF4500'],
+                borderColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF4500'],
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: bmiData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: bmi,
+                                yMax: bmi,
+                                borderColor: 'rgb(255, 99, 132)',
+                                borderWidth: 2,
+                                label: {
+                                    content: `Your BMI: ${bmi}`,
+                                    enabled: true,
+                                    position: 'center'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

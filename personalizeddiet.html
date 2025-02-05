@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Diet Page</title>
+    <link rel="stylesheet" type="text/css" href="navbar.css">
+    <style>
+        /* General Styles */
+        body {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+        }
+
+        /* Header */
+        header {
+            background-color: #070e16;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 60px;
+            margin-left: 50px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff0000;
+        }
+
+        /* Content */
+        .content {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .content p, .content ul {
+            max-width: 600px;
+            margin: 20px auto;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 140px;
+            height: 50px;
+            background: linear-gradient(to top, #00154c, #12376e, #23487f);
+            color: #fff;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to top, #23487f, #12376e, #00154c);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="" alt="Be Fit">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="login.html">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="content">
+    <h1>Personalized Diet</h1>
+    <img src="https://img.freepik.com/free-photo/buddha-bowl-dish-with-vegetables-legumes-top-view_1150-42589.jpg?t=st=1716103132~exp=1716106732~hmac=5622bf2d6fc18f8d5971ec690dfde5b5b4bbeaa156cb97b11242a641127fdf6e&w=996" alt="Diet Image">
+    <div>
+        <p>A personalized diet is tailored to meet individual nutritional needs, health goals, and dietary preferences. It focuses on consuming a variety of nutrient-rich foods in appropriate portions to support overall health and well-being.</p>
+        <p>A healthy diet is important as it:</p>
+        <ul>
+            <li>Provides essential nutrients required for bodily functions and optimal health</li>
+            <li>Supports weight management and helps maintain a healthy body weight</li>
+            <li>Reduces the risk of chronic diseases such as heart disease, diabetes, and certain cancers</li>
+            <li>Boosts energy levels and enhances physical and mental performance</li>
+            <li>Improves digestion and gut health</li>
+            <li>Promotes better sleep quality and overall mood</li>
+            <li>Increases longevity and enhances quality of life</li>
+        </ul>
+        <p>By following a personalized diet plan, individuals can experience improved health outcomes, increased vitality, and a better quality of life.</p>
+    </div>
+</div>
+
+<div class="btn-container">
+    <a href="gain.html" class="btn">Weight Gain</a>
+    <a href="loss.html" class="btn">Weight Loss</a>
+</div>
+
+</body>
+</html>

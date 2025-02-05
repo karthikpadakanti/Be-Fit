@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        #timer {
+            font-size: 72px;
+            font-weight: bold;
+            color: #FF5733; /* Orange */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        #startBtn, #stopBtn {
+            padding: 15px 30px;
+            background-color: #FF5733; /* Orange */
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+        #startBtn:hover, #stopBtn:hover {
+            background-color: #FF4500; /* Red */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="timer">00:00</div>
+    <button id="startBtn">Start </button>
+    <button id="stopBtn">Stop </button>
+</div>
+
+<script>
+    const timerDisplay = document.getElementById('timer');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+
+    let time = 0;
+    let timer;
+
+    function startTimer() {
+        timer = setInterval(updateTimer, 1000);
+        startBtn.disabled = true;
+    }
+
+    function stopTimer() {
+        clearInterval(timer);
+        startBtn.disabled = false;
+    }
+
+    function updateTimer() {
+        time++;
+        const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+        const seconds = (time % 60).toString().padStart(2, '0');
+        timerDisplay.textContent = `${minutes}:${seconds}`;
+    }
+
+    startBtn.addEventListener('click', startTimer);
+    stopBtn.addEventListener('click', stopTimer);
+</script>
+
+</body>
+</html>
